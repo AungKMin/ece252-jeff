@@ -39,7 +39,8 @@ int main( int argc, char** argv ) {
         if ( -1 != *rv ) {
             printf("Found at %d by thread %d \n", *rv, i);
         }
-        /* free( returnValue ); */
+        free( returnValue ); 
+        free( returnValue ); 
     }
 
     pthread_exit(0);

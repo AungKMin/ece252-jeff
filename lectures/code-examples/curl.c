@@ -26,6 +26,10 @@ int main( int argc, char** argv ) {
 
     curl_easy_perform( handle );
 
+    curl_easy_cleanup(handle);
+
     curl_global_cleanup( );
+
+    fclose(f);
     return 0;
 }

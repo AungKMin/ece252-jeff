@@ -25,23 +25,24 @@ int main( int argc, char** argv ) {
     pthread_join( tb, NULL );
 
     pthread_mutex_destroy( &mutexA );
-    pthread_mutex_destroy( &mutexA );
 
     pthread_exit( 0 );
 }
 
 void* threadA( void* ignore ) {
-	global = 1;
     pthread_mutex_lock( &mutexA );
     pthread_mutex_lock( &mutexB );
+	global = 1;
     pthread_mutex_unlock( &mutexA );
     pthread_mutex_unlock( &mutexB );
     pthread_exit( 0 );
 }
 
 void* threadB( void* ignore ) {
-	global = 2;
-    pthread_mutex_lock( &mutexB );
     pthread_mutex_lock( &mutexA );
+    pthread_mutex_lock( &mutexB );
+	global = 2;
+    pthread_mutex_unlock( &mutexA );
+    pthread_mutex_unlock( &mutexB );
     pthread_exit( 0 );
 }
